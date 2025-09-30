@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto de Puertas Automáticas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚪 Generador de Presupuestos</h1>
+            <p class="subtitle">Puertas Automáticas Profesionales</p>
+        </header>
+
+        <main>
+            <form id="budgetForm">
+                <!-- Información del Cliente -->
+                <section class="form-section">
+                    <h2>Información del Cliente</h2>
+                    <div class="form-group">
+                        <label for="clientName">Nombre del Cliente:</label>
+                        <input type="text" id="clientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Email:</label>
+                        <input type="email" id="clientEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientPhone">Teléfono:</label>
+                        <input type="tel" id="clientPhone">
+                    </div>
+                </section>
+
+                <!-- Especificaciones de la Puerta -->
+                <section class="form-section">
+                    <h2>Especificaciones de la Puerta</h2>
+                    <div class="form-group">
+                        <label for="doorType">Tipo de Puerta:</label>
+                        <select id="doorType" required>
+                            <option value="">Seleccione...</option>
+                            <option value="corredera">Corredera</option>
+                            <option value="batiente">Batiente</option>
+                            <option value="seccional">Seccional</option>
+                            <option value="enrollable">Enrollable</option>
+                            <option value="plegable">Plegable</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="doorWidth">Ancho (metros):</label>
+                            <input type="number" id="doorWidth" step="0.1" min="0.5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doorHeight">Alto (metros):</label>
+                            <input type="number" id="doorHeight" step="0.1" min="0.5" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Material -->
+                <section class="form-section">
+                    <h2>Material</h2>
+                    <div class="form-group">
+                        <label for="material">Material:</label>
+                        <select id="material" required>
+                            <option value="">Seleccione...</option>
+                            <option value="aluminio">Aluminio</option>
+                            <option value="acero">Acero</option>
+                            <option value="cristal">Cristal Templado</option>
+                            <option value="pvc">PVC</option>
+                            <option value="madera">Madera</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- Sistema de Automatización -->
+                <section class="form-section">
+                    <h2>Sistema de Automatización</h2>
+                    <div class="form-group">
+                        <label for="motorType">Tipo de Motor:</label>
+                        <select id="motorType" required>
+                            <option value="">Seleccione...</option>
+                            <option value="basico">Básico</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="premium">Premium Industrial</option>
+                        </select>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="sensor" name="extras">
+                            <span>Sensores de Seguridad (+150€)</span>
+                        </label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="remote" name="extras">
+                            <span>Control Remoto (+80€)</span>
+                        </label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="emergency" name="extras">
+                            <span>Sistema de Emergencia (+200€)</span>
+                        </label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="wifi" name="extras">
+                            <span>Control WiFi/App (+120€)</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Instalación -->
+                <section class="form-section">
+                    <h2>Instalación</h2>
+                    <div class="form-group">
+                        <label for="installation">Incluir Instalación:</label>
+                        <select id="installation" required>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="warranty">Garantía Extendida:</label>
+                        <select id="warranty">
+                            <option value="1">1 año (incluida)</option>
+                            <option value="2">2 años (+100€)</option>
+                            <option value="3">3 años (+200€)</option>
+                            <option value="5">5 años (+350€)</option>
+                        </select>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Calcular Presupuesto</button>
+                    <button type="reset" class="btn btn-secondary">Limpiar Formulario</button>
+                </div>
+            </form>
+
+            <!-- Resumen del Presupuesto -->
+            <div id="budgetSummary" class="budget-summary hidden">
+                <h2>📋 Resumen del Presupuesto</h2>
+                
+                <div class="client-info">
+                    <h3>Datos del Cliente</h3>
+                    <div id="clientInfo"></div>
+                </div>
+
+                <div class="budget-details">
+                    <h3>Detalles del Proyecto</h3>
+                    <div id="projectDetails"></div>
+                </div>
+
+                <div class="budget-breakdown">
+                    <h3>Desglose de Costos</h3>
+                    <table id="costBreakdown">
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="costBody"></tbody>
+                        <tfoot>
+                            <tr class="total-row">
+                                <td><strong>TOTAL</strong></td>
+                                <td><strong id="totalCost"></strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="budget-actions">
+                    <button onclick="printBudget()" class="btn btn-primary">🖨️ Imprimir</button>
+                    <button onclick="newBudget()" class="btn btn-secondary">📝 Nuevo Presupuesto</button>
+                </div>
+
+                <div class="budget-footer">
+                    <p><small>Presupuesto válido por 30 días. Los precios no incluyen IVA.</small></p>
+                    <p><small>Fecha: <span id="budgetDate"></span></small></p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Puertas Automáticas. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
