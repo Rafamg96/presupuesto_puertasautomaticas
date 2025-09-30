@@ -6,6 +6,7 @@
 
 :root {
     --primary-color: #10b981;
+    --primary-dark: #059669;
     --secondary-color: #64748b;
     --success-color: #10b981;
     --danger-color: #ef4444;
@@ -51,7 +52,7 @@ header {
 }
 
 .header-logo .logo {
-    max-width: 150px;
+    max-width: 200px;
     max-height: 80px;
     object-fit: contain;
 }

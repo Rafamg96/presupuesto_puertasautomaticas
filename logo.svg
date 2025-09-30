@@ -1,6 +1,10 @@
-<svg width="150" height="80" xmlns="http://www.w3.org/2000/svg">
-  <rect x="10" y="15" width="60" height="50" fill="#10b981" rx="5"/>
-  <rect x="25" y="25" width="30" height="35" fill="white" rx="3"/>
-  <circle cx="40" cy="42" r="3" fill="#10b981"/>
-  <text x="80" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">PA</text>
+<svg width="200" height="80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Door icon with two shades of green -->
+  <rect x="5" y="15" width="50" height="50" fill="#059669" rx="5"/>
+  <rect x="15" y="22" width="30" height="36" fill="#10b981" rx="3"/>
+  <circle cx="38" cy="40" r="2.5" fill="#059669"/>
+  
+  <!-- Text: Automatismos Viped -->
+  <text x="65" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#059669">Automatismos</text>
+  <text x="65" y="55" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#10b981">VIPED</text>
 </svg>
