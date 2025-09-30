@@ -1,4 +1,4 @@
-# 🚪 Presupuesto de Puertas Automáticas
+# 🚪 Automatismos Viped - Presupuesto de Puertas Automáticas
 
 Aplicación web de una sola página (SPA) para generar presupuestos profesionales de puertas automáticas.
 
@@ -58,10 +58,14 @@ No requiere instalación. Simplemente abre el archivo `index.html` en tu navegad
 
 ## 🌐 Despliegue en GitHub Pages
 
+La aplicación se despliega automáticamente en GitHub Pages mediante GitHub Actions cuando se hace push a la rama `main`.
+
+**URL de la aplicación:** `https://rafamg96.github.io/presupuesto_puertasautomaticas/`
+
+Para configurar el despliegue manual:
 1. Ve a la configuración del repositorio
-2. En la sección "Pages", selecciona la rama `main` o la que prefieras
-3. Guarda los cambios
-4. Tu aplicación estará disponible en: `https://[tu-usuario].github.io/presupuesto_puertasautomaticas/`
+2. En la sección "Pages", selecciona "GitHub Actions" como fuente
+3. Los cambios se desplegarán automáticamente con cada push a `main`
 
 ## 📄 Licencia
 
