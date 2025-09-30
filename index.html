@@ -141,35 +141,72 @@
 
             <!-- Resumen del Presupuesto -->
             <div id="budgetSummary" class="budget-summary hidden">
-                <h2>📋 Resumen del Presupuesto</h2>
-                
-                <div class="client-info">
-                    <h3>Datos del Cliente</h3>
+                <!-- Invoice Header -->
+                <div class="invoice-header">
+                    <div class="company-info">
+                        <h1>PUERTAS AUTOMÁTICAS</h1>
+                        <p>C/ Ejemplo, 123</p>
+                        <p>28001 Madrid, España</p>
+                        <p>Tel: +34 900 123 456</p>
+                        <p>Email: info@puertasautomaticas.es</p>
+                        <p>CIF: B-12345678</p>
+                    </div>
+                    <div class="invoice-details">
+                        <h2>FACTURA / PRESUPUESTO</h2>
+                        <p><strong>Nº:</strong> <span id="invoiceNumber"></span></p>
+                        <p><strong>Fecha:</strong> <span id="invoiceDate"></span></p>
+                        <p><strong>Válido hasta:</strong> <span id="validUntil"></span></p>
+                    </div>
+                </div>
+
+                <!-- Client Info -->
+                <div class="invoice-client">
+                    <h3>DATOS DEL CLIENTE</h3>
                     <div id="clientInfo"></div>
                 </div>
 
-                <div class="budget-details">
-                    <h3>Detalles del Proyecto</h3>
+                <!-- Project Details -->
+                <div class="invoice-project">
+                    <h3>DESCRIPCIÓN DEL PROYECTO</h3>
                     <div id="projectDetails"></div>
                 </div>
 
-                <div class="budget-breakdown">
-                    <h3>Desglose de Costos</h3>
+                <!-- Invoice Table -->
+                <div class="invoice-breakdown">
                     <table id="costBreakdown">
                         <thead>
                             <tr>
-                                <th>Concepto</th>
-                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Descripción</th>
+                                <th>Precio Unit.</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody id="costBody"></tbody>
                         <tfoot>
+                            <tr class="subtotal-row">
+                                <td colspan="3"><strong>Subtotal (Base Imponible)</strong></td>
+                                <td><strong id="subtotalCost"></strong></td>
+                            </tr>
+                            <tr class="tax-row">
+                                <td colspan="3">IVA (21%)</td>
+                                <td id="taxCost"></td>
+                            </tr>
                             <tr class="total-row">
-                                <td><strong>TOTAL</strong></td>
+                                <td colspan="3"><strong>TOTAL</strong></td>
                                 <td><strong id="totalCost"></strong></td>
                             </tr>
                         </tfoot>
                     </table>
+                </div>
+
+                <!-- Payment and Terms -->
+                <div class="invoice-terms">
+                    <h3>CONDICIONES</h3>
+                    <p>• Presupuesto válido por 30 días desde la fecha de emisión</p>
+                    <p>• Forma de pago: Transferencia bancaria o efectivo</p>
+                    <p>• Garantía incluida según lo especificado</p>
+                    <p>• Instalación sujeta a inspección previa del lugar</p>
                 </div>
 
                 <div class="budget-actions">
@@ -177,9 +214,8 @@
                     <button onclick="newBudget()" class="btn btn-secondary">📝 Nuevo Presupuesto</button>
                 </div>
 
-                <div class="budget-footer">
-                    <p><small>Presupuesto válido por 30 días. Los precios no incluyen IVA.</small></p>
-                    <p><small>Fecha: <span id="budgetDate"></span></small></p>
+                <div class="invoice-footer">
+                    <p><small>Puertas Automáticas - CIF: B-12345678 - Registro Mercantil de Madrid</small></p>
                 </div>
             </div>
         </main>

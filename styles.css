@@ -183,7 +183,7 @@ select:focus {
     box-shadow: var(--shadow-lg);
 }
 
-/* Budget Summary */
+/* Budget Summary / Invoice */
 .budget-summary {
     background: white;
     padding: 40px;
@@ -196,32 +196,90 @@ select:focus {
     display: none;
 }
 
-.budget-summary h2 {
-    font-size: 2rem;
+/* Invoice Header */
+.invoice-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.company-info h1 {
+    font-size: 1.8rem;
     color: var(--primary-color);
-    margin-bottom: 30px;
-    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
-.client-info,
-.budget-details,
-.budget-breakdown {
-    margin-bottom: 30px;
+.company-info p {
+    margin: 5px 0;
+    color: var(--text-color);
+    font-size: 0.95rem;
 }
 
-.budget-summary h3 {
-    font-size: 1.3rem;
+.invoice-details {
+    text-align: right;
+}
+
+.invoice-details h2 {
+    font-size: 1.8rem;
     color: var(--secondary-color);
     margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border-color);
+    font-weight: 700;
 }
 
-#clientInfo p,
-#projectDetails p {
-    padding: 8px 0;
+.invoice-details p {
+    margin: 8px 0;
     font-size: 1rem;
-    line-height: 1.8;
+}
+
+/* Invoice Client */
+.invoice-client {
+    background-color: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.invoice-client h3 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.invoice-client p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+/* Invoice Project */
+.invoice-project {
+    background-color: #f1f5f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.invoice-project h3 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.invoice-project p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+/* Invoice Breakdown */
+.invoice-breakdown {
+    margin-bottom: 30px;
 }
 
 /* Table */
@@ -229,6 +287,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
+    border: 1px solid var(--border-color);
 }
 
 thead {
@@ -242,7 +301,22 @@ th {
     font-weight: 600;
 }
 
+th:first-child {
+    width: 10%;
+    text-align: center;
+}
+
+th:nth-child(2) {
+    width: 45%;
+}
+
+th:nth-child(3) {
+    width: 20%;
+    text-align: right;
+}
+
 th:last-child {
+    width: 25%;
     text-align: right;
 }
 
@@ -258,18 +332,52 @@ td {
     padding: 15px;
 }
 
+td:first-child {
+    text-align: center;
+    font-weight: 600;
+}
+
+td:nth-child(3),
 td:last-child {
     text-align: right;
+    font-weight: 500;
+}
+
+tbody td small {
+    color: var(--secondary-color);
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 4px;
+}
+
+.subtotal-row {
+    background-color: #f8fafc;
+    font-size: 1.1rem;
+}
+
+.subtotal-row td {
+    padding: 15px;
+    border-top: 2px solid var(--border-color);
+}
+
+.tax-row {
+    background-color: #f1f5f9;
+    font-size: 1rem;
+}
+
+.tax-row td {
+    padding: 12px 15px;
 }
 
 .total-row {
-    background-color: #f1f5f9;
-    font-size: 1.2rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.3rem;
 }
 
 .total-row td {
     padding: 20px 15px;
-    border-top: 2px solid var(--primary-color);
+    border-top: 3px solid var(--primary-color);
 }
 
 /* Budget Actions */
@@ -285,13 +393,36 @@ td:last-child {
     flex: 0 1 auto;
 }
 
-/* Budget Footer */
-.budget-footer {
+/* Invoice Terms */
+.invoice-terms {
+    background-color: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    padding: 20px;
+    margin: 30px 0;
+    border-radius: 4px;
+}
+
+.invoice-terms h3 {
+    font-size: 1.1rem;
+    color: #92400e;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.invoice-terms p {
+    margin: 8px 0;
+    color: #78350f;
+    font-size: 0.9rem;
+}
+
+/* Invoice Footer */
+.invoice-footer {
     text-align: center;
     margin-top: 30px;
     padding-top: 20px;
     border-top: 2px solid var(--border-color);
     color: var(--secondary-color);
+    font-size: 0.85rem;
 }
 
 /* Footer */
@@ -325,17 +456,37 @@ footer {
         padding: 20px;
     }
 
-    .budget-summary h2 {
-        font-size: 1.5rem;
+    .invoice-header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .invoice-details {
+        text-align: left;
+    }
+
+    .company-info h1,
+    .invoice-details h2 {
+        font-size: 1.4rem;
     }
 
     table {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     th,
     td {
         padding: 10px 8px;
+    }
+
+    th:first-child,
+    td:first-child {
+        display: none;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+        width: 50%;
     }
 }
 
@@ -370,12 +521,11 @@ footer {
 
     .container {
         max-width: 100%;
+        padding: 0;
     }
 
     header {
-        background: white;
-        color: var(--text-color);
-        border: 2px solid var(--primary-color);
+        display: none;
     }
 
     form,
@@ -387,13 +537,51 @@ footer {
     .budget-summary {
         box-shadow: none;
         page-break-inside: avoid;
+        padding: 20px;
     }
 
-    .budget-summary h2 {
-        color: var(--text-color);
+    .invoice-header {
+        border-bottom: 2px solid black;
+    }
+
+    .company-info h1 {
+        color: black;
+    }
+
+    .invoice-details h2 {
+        color: black;
     }
 
     table {
         page-break-inside: avoid;
+        border: 1px solid black;
+    }
+
+    thead {
+        background-color: #e5e7eb !important;
+        color: black !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .total-row {
+        background-color: #e5e7eb !important;
+        color: black !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .invoice-terms {
+        background-color: #f3f4f6 !important;
+        border-left: 3px solid #9ca3af;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .invoice-client,
+    .invoice-project {
+        background-color: #f9fafb !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 }

@@ -154,10 +154,22 @@ function calculateBudget() {
 }
 
 function displayBudgetSummary(data) {
+    // Generate invoice number
+    const invoiceNumber = generateInvoiceNumber();
+    document.getElementById('invoiceNumber').textContent = invoiceNumber;
+    
+    // Set dates
+    const today = new Date();
+    const validUntilDate = new Date(today);
+    validUntilDate.setDate(validUntilDate.getDate() + 30);
+    
+    document.getElementById('invoiceDate').textContent = formatDate(today);
+    document.getElementById('validUntil').textContent = formatDate(validUntilDate);
+    
     // Mostrar información del cliente
     const clientInfo = document.getElementById('clientInfo');
     clientInfo.innerHTML = `
-        <p><strong>Nombre:</strong> ${data.clientName}</p>
+        <p><strong>Nombre/Razón Social:</strong> ${data.clientName}</p>
         ${data.clientEmail ? `<p><strong>Email:</strong> ${data.clientEmail}</p>` : ''}
         ${data.clientPhone ? `<p><strong>Teléfono:</strong> ${data.clientPhone}</p>` : ''}
     `;
@@ -165,46 +177,70 @@ function displayBudgetSummary(data) {
     // Mostrar detalles del proyecto
     const projectDetails = document.getElementById('projectDetails');
     projectDetails.innerHTML = `
-        <p><strong>Tipo de Puerta:</strong> ${doorTypeNames[data.doorType]}</p>
+        <p><strong>Tipo:</strong> ${doorTypeNames[data.doorType]} en ${materialNames[data.material]}</p>
         <p><strong>Dimensiones:</strong> ${data.doorWidth}m × ${data.doorHeight}m (${data.area.toFixed(2)} m²)</p>
-        <p><strong>Material:</strong> ${materialNames[data.material]}</p>
         <p><strong>Motor:</strong> ${motorNames[data.motorType]}</p>
         ${data.selectedExtras.length > 0 ? `<p><strong>Extras:</strong> ${data.selectedExtras.join(', ')}</p>` : ''}
         <p><strong>Instalación:</strong> ${data.installation === 'si' ? 'Incluida' : 'No incluida'}</p>
         <p><strong>Garantía:</strong> ${data.warranty} año${data.warranty > 1 ? 's' : ''}</p>
     `;
     
-    // Mostrar desglose de costos
+    // Mostrar desglose de costos con formato de factura
     const costBody = document.getElementById('costBody');
     let costRows = '';
     
-    costRows += `<tr><td>Puerta (${doorTypeNames[data.doorType]} - ${materialNames[data.material]})</td><td>${formatCurrency(data.costs.door)}</td></tr>`;
-    costRows += `<tr><td>Sistema de Automatización (${motorNames[data.motorType]})</td><td>${formatCurrency(data.costs.motor)}</td></tr>`;
+    costRows += `<tr>
+        <td>1</td>
+        <td>Puerta ${doorTypeNames[data.doorType]} en ${materialNames[data.material]}<br>
+            <small>Dimensiones: ${data.doorWidth}m × ${data.doorHeight}m (${data.area.toFixed(2)} m²)</small></td>
+        <td>${formatCurrency(data.costs.door)}</td>
+        <td>${formatCurrency(data.costs.door)}</td>
+    </tr>`;
+    
+    costRows += `<tr>
+        <td>1</td>
+        <td>Sistema de Automatización ${motorNames[data.motorType]}</td>
+        <td>${formatCurrency(data.costs.motor)}</td>
+        <td>${formatCurrency(data.costs.motor)}</td>
+    </tr>`;
     
     if (data.costs.extras > 0) {
-        costRows += `<tr><td>Accesorios y Extras</td><td>${formatCurrency(data.costs.extras)}</td></tr>`;
+        costRows += `<tr>
+            <td>1</td>
+            <td>Accesorios y Extras<br><small>${data.selectedExtras.join(', ')}</small></td>
+            <td>${formatCurrency(data.costs.extras)}</td>
+            <td>${formatCurrency(data.costs.extras)}</td>
+        </tr>`;
     }
     
     if (data.costs.installation > 0) {
-        costRows += `<tr><td>Instalación</td><td>${formatCurrency(data.costs.installation)}</td></tr>`;
+        costRows += `<tr>
+            <td>1</td>
+            <td>Instalación Profesional</td>
+            <td>${formatCurrency(data.costs.installation)}</td>
+            <td>${formatCurrency(data.costs.installation)}</td>
+        </tr>`;
     }
     
     if (data.costs.warranty > 0) {
-        costRows += `<tr><td>Garantía Extendida (${data.warranty} años)</td><td>${formatCurrency(data.costs.warranty)}</td></tr>`;
+        costRows += `<tr>
+            <td>1</td>
+            <td>Garantía Extendida (${data.warranty} años)</td>
+            <td>${formatCurrency(data.costs.warranty)}</td>
+            <td>${formatCurrency(data.costs.warranty)}</td>
+        </tr>`;
     }
     
     costBody.innerHTML = costRows;
     
-    // Mostrar total
-    document.getElementById('totalCost').textContent = formatCurrency(data.costs.total);
+    // Calculate and show tax breakdown
+    const subtotal = data.costs.total;
+    const tax = subtotal * 0.21; // 21% IVA
+    const total = subtotal + tax;
     
-    // Mostrar fecha
-    const today = new Date();
-    document.getElementById('budgetDate').textContent = today.toLocaleDateString('es-ES', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
+    document.getElementById('subtotalCost').textContent = formatCurrency(subtotal);
+    document.getElementById('taxCost').textContent = formatCurrency(tax);
+    document.getElementById('totalCost').textContent = formatCurrency(total);
     
     // Ocultar formulario y mostrar resumen
     document.getElementById('budgetForm').style.display = 'none';
@@ -212,6 +248,20 @@ function displayBudgetSummary(data) {
     
     // Scroll al resumen
     document.getElementById('budgetSummary').scrollIntoView({ behavior: 'smooth' });
+}
+
+function generateInvoiceNumber() {
+    const year = new Date().getFullYear();
+    const random = Math.floor(Math.random() * 900000) + 100000;
+    return `${year}-${random}`;
+}
+
+function formatDate(date) {
+    return date.toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
 }
 
 function formatCurrency(amount) {
