@@ -95,6 +95,24 @@ header h1 {
     gap: 20px;
 }
 
+/* Dimension Diagram */
+.dimension-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+}
+
+.dimension-diagram svg {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+}
+
 label {
     display: block;
     margin-bottom: 8px;

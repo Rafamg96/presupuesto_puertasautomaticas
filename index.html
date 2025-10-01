@@ -49,6 +49,40 @@
                             <option value="plegable">Plegable</option>
                         </select>
                     </div>
+                    
+                    <!-- Diagrama de Dimensiones -->
+                    <div class="dimension-diagram">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Door -->
+                            <rect x="120" y="50" width="160" height="200" fill="#e2e8f0" stroke="#10b981" stroke-width="3"/>
+                            <line x1="200" y1="50" x2="200" y2="250" stroke="#94a3b8" stroke-width="1"/>
+                            
+                            <!-- Width Arrow and Label -->
+                            <line x1="120" y1="270" x2="280" y2="270" stroke="#10b981" stroke-width="2" marker-start="url(#arrowLeft)" marker-end="url(#arrowRight)"/>
+                            <text x="200" y="290" text-anchor="middle" font-size="16" font-weight="bold" fill="#10b981">ANCHO</text>
+                            
+                            <!-- Height Arrow and Label -->
+                            <line x1="300" y1="50" x2="300" y2="250" stroke="#10b981" stroke-width="2" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>
+                            <text x="330" y="155" text-anchor="middle" font-size="16" font-weight="bold" fill="#10b981" transform="rotate(90 330 155)">ALTO</text>
+                            
+                            <!-- Arrow markers -->
+                            <defs>
+                                <marker id="arrowLeft" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                    <polygon points="10,5 0,0 0,10" fill="#10b981"/>
+                                </marker>
+                                <marker id="arrowRight" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                    <polygon points="0,5 10,0 10,10" fill="#10b981"/>
+                                </marker>
+                                <marker id="arrowUp" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                    <polygon points="5,10 0,0 10,0" fill="#10b981"/>
+                                </marker>
+                                <marker id="arrowDown" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                    <polygon points="5,0 0,10 10,10" fill="#10b981"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="doorWidth">Ancho (metros):</label>
