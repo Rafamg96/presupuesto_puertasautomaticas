@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  color-scheme: light dark;
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Estilos para impresión */
+@media print {
+  body {
+    background: white !important;
+  }
+  
+  /* Ocultar elementos innecesarios al imprimir */
+  .print\:hidden {
+    display: none !important;
+  }
+  
+  /* Ajustar márgenes de página */
+  @page {
+    margin: 1cm;
+  }
+  
+  /* Evitar saltos de página dentro de elementos */
+  #budget-document {
+    page-break-inside: avoid;
+  }
+  
+  /* Asegurar colores en impresión */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
